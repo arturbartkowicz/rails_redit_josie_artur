@@ -18,9 +18,10 @@ services:
       - "3000:3000"
     depends_on:
       - db
+      - webpacker
   webpacker:
     build: .
-    command: ./bin/webpack-dev-server
+    command: bash -c "rm -rf ./public/packs; ./bin/webpack-dev-server"
     volumes:
       - .:/myapp
     ports:

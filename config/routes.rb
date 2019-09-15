@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   get '/pages/:id', to: 'pages#show', as: 'page'
   get '/pages/:id/edit', to: 'pages#edit', as: 'edit_page'
   patch '/pages/:id', to: 'pages#update'
+  delete '/pages/:id', to: 'pages#destroy'
 
   # (UP) In plain English you could read this as, get requests for the /pages path should go to... 
   # ... the PagestController's index method.

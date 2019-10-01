@@ -2,10 +2,14 @@ class PostsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_post, only: [:show, :edit, :update, :destroy]
 
+  # after_action :verify_authorized
+  # after_action :verify_policy_scoped
+
   # GET /posts
   # GET /posts.json
   def index
     @posts = Post.all
+    # authorize @posts
   end
 
   # GET /posts/1
@@ -16,6 +20,7 @@ class PostsController < ApplicationController
   # GET /posts/new
   def new
     @post = Post.new
+    authorize @post
   end
 
   # GET /posts/1/edit
@@ -26,6 +31,7 @@ class PostsController < ApplicationController
   # POST /posts.json
   def create
     @post = Post.new(post_params)
+    authorize @post
 
     respond_to do |format|
       if @post.save
@@ -67,6 +73,7 @@ class PostsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_post
       @post = Post.find(params[:id])
+      authorize @post
     end
 
     # Never trust parameters from the scary internet, only allow the white list through. params.fetch(:post, {})
